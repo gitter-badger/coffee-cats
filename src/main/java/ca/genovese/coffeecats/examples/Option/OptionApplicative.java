@@ -2,18 +2,18 @@ package ca.genovese.coffeecats.examples.option;
 
 import ca.genovese.coffeecats.structures.Applicative;
 import ca.genovese.coffeecats.types.Option;
-import ca.genovese.coffeecats.util.HigherKind;
+import ca.genovese.coffeecats.util.Kind;
 import java.util.function.Function;
 
 public class OptionApplicative implements Applicative<Option> {
   @Override
-  public <A> HigherKind<Option, A> pure(A a) {
+  public <A> Kind<Option, A> pure(A a) {
     return Option.create(a);
   }
 
   @Override
-  public <A, B> HigherKind<Option, B> apply(HigherKind<Option, A> fa, HigherKind<Option,
-      Function<A, B>> ff) {
+  public <A, B> Kind<Option, B> apply(Kind<Option, A> fa, Kind<Option,
+          Function<A, B>> ff) {
     if (ff instanceof Option.None || fa instanceof Option.None) {
       return new Option.None<>();
     } else {

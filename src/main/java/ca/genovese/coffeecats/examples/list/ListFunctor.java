@@ -2,12 +2,12 @@ package ca.genovese.coffeecats.examples.list;
 
 import ca.genovese.coffeecats.structures.Functor;
 import ca.genovese.coffeecats.types.List;
-import ca.genovese.coffeecats.util.HigherKind;
+import ca.genovese.coffeecats.util.Kind;
 import java.util.function.Function;
 
 public class ListFunctor implements Functor<List> {
   @Override
-  public <A, B> HigherKind<List, B> map(HigherKind<List, A> fa, Function<A, B> f) {
+  public <A, B> Kind<List, B> map(Kind<List, A> fa, Function<A, B> f) {
     if (fa instanceof List.Nil) {
       return new List.Nil<>();
     } else {

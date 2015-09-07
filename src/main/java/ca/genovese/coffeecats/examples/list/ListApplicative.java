@@ -2,25 +2,25 @@ package ca.genovese.coffeecats.examples.list;
 
 import ca.genovese.coffeecats.structures.Applicative;
 import ca.genovese.coffeecats.types.List;
-import ca.genovese.coffeecats.util.HigherKind;
+import ca.genovese.coffeecats.util.Kind;
 import java.util.function.Function;
 
 public class ListApplicative implements Applicative<List> {
   @Override
-  public <A> HigherKind<List, A> pure(A a) {
+  public <A> Kind<List, A> pure(A a) {
     return List.create(a);
   }
 
   @Override
-  public <A, B> HigherKind<List, B> apply(HigherKind<List, A> fa,
-                                          HigherKind<List, Function<A, B>> ff) {
+  public <A, B> Kind<List, B> apply(Kind<List, A> fa,
+                                          Kind<List, Function<A, B>> ff) {
     return applyHelper(fa, fa, ff);
   }
 
 
-  private <A, B> HigherKind<List, B> applyHelper(HigherKind<List, A> full,
-                                                 HigherKind<List, A> fa,
-                                                 HigherKind<List, Function<A, B>> ff) {
+  private <A, B> Kind<List, B> applyHelper(Kind<List, A> full,
+                                                 Kind<List, A> fa,
+                                                 Kind<List, Function<A, B>> ff) {
     if (ff instanceof List.Nil) {
       return new List.Nil<>();
     } else if (fa instanceof List.Nil) {

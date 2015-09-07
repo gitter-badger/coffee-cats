@@ -1,25 +1,25 @@
 package ca.genovese.coffeecats.structures;
 
-import ca.genovese.coffeecats.util.HigherKind;
+import ca.genovese.coffeecats.util.Kind;
 import java.util.function.Function;
 
-public interface Monad<F extends HigherKind> extends Applicative<F> {
+public interface Monad<F extends Kind> extends Applicative<F> {
   @Override
-  <A> HigherKind<F, A> pure(A a);
+  <A> Kind<F, A> pure(A a);
 
-  <A, B> HigherKind<F, B> flatMap(HigherKind<F, A> fa, Function<A, HigherKind<F, B>> f);
+  <A, B> Kind<F, B> flatMap(Kind<F, A> fa, Function<A, Kind<F, B>> f);
 
   @Override
-  default <A, B> HigherKind<F, B> apply(HigherKind<F, A> fa, HigherKind<F, Function<A, B>> ff) {
+  default <A, B> Kind<F, B> apply(Kind<F, A> fa, Kind<F, Function<A, B>> ff) {
     return flatMap(ff, f -> map(fa, f));
   }
 
   @Override
-  default <A, B> HigherKind<F, B> map(HigherKind<F, A> fa, Function<A, B> f) {
+  default <A, B> Kind<F, B> map(Kind<F, A> fa, Function<A, B> f) {
     return flatMap(fa, a -> pure(f.apply(a)));
   }
 
-  default <A> HigherKind<F, A> flatten(HigherKind<F, HigherKind<F, A>> ffa) {
+  default <A> Kind<F, A> flatten(Kind<F, Kind<F, A>> ffa) {
     return flatMap(ffa, fa -> fa);
   }
 

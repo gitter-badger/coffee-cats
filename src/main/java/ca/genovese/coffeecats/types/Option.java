@@ -1,8 +1,8 @@
 package ca.genovese.coffeecats.types;
 
-import ca.genovese.coffeecats.util.HigherKind;
+import ca.genovese.coffeecats.util.Kind;
 
-public interface Option<T> extends HigherKind<Option, T> {
+public interface Option<T> extends Kind<Option, T> {
   static <A> Option<A> create(A a) {
     if (a != null) {
       return new OptionSome<>(a);

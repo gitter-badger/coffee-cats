@@ -1,9 +1,9 @@
 package ca.genovese.coffeecats.types;
 
-import ca.genovese.coffeecats.util.HigherKind;
+import ca.genovese.coffeecats.util.Kind;
 import java.util.Iterator;
 
-public interface List<T> extends HigherKind<List, T>, Iterable<T> {
+public interface List<T> extends Kind<List, T>, Iterable<T> {
   static <A> List<A> create(A... as) {
     List list = new Nil<>();
 
