@@ -16,7 +16,7 @@ public class ListOfOptionFunctorTest extends FunctorLaws<Integer, Double, String
   Random rnd = new SecureRandom();
 
   @Override
-  protected Functor<Kind<List,Option>> getFunctor() {
+  protected Functor<Kind<List, Option>> getFunctor() {
     return new ListFunctor().compose(new OptionFunctor());
   }
 
@@ -24,20 +24,20 @@ public class ListOfOptionFunctorTest extends FunctorLaws<Integer, Double, String
   protected Kind<Kind<List, Option>, Integer> getRandomF() {
     int count = rnd.nextInt(5000);
     List<Option<Integer>> list = new List.Nil<>();
-    for(int i = 0; i < count; i++) {
-      if(rnd.nextBoolean()) {
+    for (int i = 0; i < count; i++) {
+      if (rnd.nextBoolean()) {
         list = new List.Cons<>(new Option.None<>(), list);
       } else {
         list = new List.Cons<>(new Option.Some<>(rnd.nextInt()), list);
       }
 
     }
-    return (Kind<Kind<List, Option>, Integer>)(Object) list;
+    return (Kind<Kind<List, Option>, Integer>) (Object) list;
   }
 
   @Override
   protected Function<Integer, Double> getRandomAB() {
-    if(rnd.nextBoolean()) {
+    if (rnd.nextBoolean()) {
       return i -> i.doubleValue();
     } else {
       double v = rnd.nextDouble();
@@ -48,7 +48,7 @@ public class ListOfOptionFunctorTest extends FunctorLaws<Integer, Double, String
 
   @Override
   protected Function<Double, String> getRandomBC() {
-    if(rnd.nextBoolean()) {
+    if (rnd.nextBoolean()) {
       return d -> d.toString();
     } else {
       return d -> d.toString().concat(d.toString());
