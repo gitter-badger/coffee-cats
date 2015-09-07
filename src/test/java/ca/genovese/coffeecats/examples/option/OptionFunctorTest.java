@@ -2,51 +2,60 @@ package ca.genovese.coffeecats.examples.option;
 
 import static org.junit.Assert.assertEquals;
 
+import ca.genovese.coffeecats.types.List;
 import ca.genovese.coffeecats.examples.list.ListFunctor;
 import ca.genovese.coffeecats.structures.Functor;
-import java.util.ArrayList;
-import java.util.List;
+import ca.genovese.coffeecats.util.HigherKind;
+import ca.genovese.coffeecats.types.Option;
 import java.util.function.Function;
 import org.junit.Test;
 
 public class OptionFunctorTest {
-  OptionFunctor optionFunctor = new OptionFunctor();
+  Functor<Option> optionFunctor;
+
+  public OptionFunctorTest() {
+    optionFunctor = new OptionFunctor();
+  }
 
   @Test
   public void testIdentityLawSome() {
     Option<Integer> i = Option.create(1);
-    assertEquals(optionFunctor.map(i, a -> a), i);
+    assertEquals(optionFunctor.map(i, a -> a).getRealType(), i);
   }
 
   @Test
   public void testIdentityLawNone() {
     Option<Integer> i = Option.create(null);
-    assertEquals(optionFunctor.map(i, a -> a), i);
+    assertEquals(optionFunctor.map(i, a -> a).getRealType(), i);
   }
 
   @Test
   public void testLift() {
     Option<Integer> i = Option.create(1);
-    Function<Option, Option> f = optionFunctor.lift(a -> a.toString());
-    assertEquals(f.apply(i), Option.create("1"));
+    Function<HigherKind<Option, Integer>, HigherKind<Option, String>> f =
+        optionFunctor.lift(a -> a.toString());
+
+    assertEquals(f.apply(i).getRealType(), Option.create("1"));
   }
 
   @Test
   public void testCompose() {
-    List<Option<Integer>> l = new ArrayList<>();
-    l.add(Option.create(1));
-    l.add(Option.create(null));
-    l.add(Option.create(3));
+    HigherKind<HigherKind<List, Option>, Integer> l =
+        (HigherKind<HigherKind<List, Option>, Integer>) (Object) List.create(
+            Option.create(1),
+            Option.create(null),
+            Option.create(3));
 
-    List<Option<Integer>> l2 = new ArrayList<>();
-    l2.add(Option.create(2));
-    l2.add(Option.create(null));
-    l2.add(Option.create(4));
+    List<Option<Integer>> l2 = List.create(
+        Option.create(2),
+        Option.create(null),
+        Option.create(4));
 
-    Functor<List> composedFunctor = new ListFunctor().compose(optionFunctor);
+    HigherKind<HigherKind<List, Option>, Integer> map = new ListFunctor()
+        .compose(optionFunctor)
+        .map(l, a -> a + 1);
 
-    List<Option<Integer>> map = composedFunctor.map(l, a -> (Integer) a + 1);
-    assertEquals(map, l2);
+    assertEquals(l2, map);
   }
 
 

@@ -1,45 +1,47 @@
 package ca.genovese.coffeecats.structures;
 
+import ca.genovese.coffeecats.util.HigherKind;
 import ca.genovese.coffeecats.util.Unit;
+import ca.genovese.coffeecats.util.types.tuple.Tuple2;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-// laws
-// identity - functor.map(a -> a).equals(functor)
+public interface Functor<F extends HigherKind> {
+  <A, B> HigherKind<F, B> map(HigherKind<F, A> fa, Function<A, B> f);
 
-// composition -
-// given Function<A,B> f and Function<B,C> g
-// (functor.map(f).map(g))
-// .equals(functor.map(a -> g.apply(f.apply(a))
-
-//public interface Functor<F<?>> {
-public interface Functor<F> {
-  //  <A, B> F<B> map(F<A> fa, Function<A,B> f);
-  <A, B> F map(F fa, Function<A,B> f);
-
-//  default <A,B> Function<F<A>, F<B>> lift (Function<A,B> f) {
-  default <A,B> Function<F, F> lift (Function<A,B> f) {
-    return (F fa) -> map(fa, f);
+  default <A, B> Function<HigherKind<F, A>, HigherKind<F, B>> lift(Function<A, B> f) {
+    return (HigherKind<F, A> fa) -> map(fa, f);
   }
 
-//  default <B> F<B> as(F<A> fa, Supplier<B> b) {
-  default <B> F as(F fa, Supplier<B> b) {
+  default <A, B> HigherKind<F, Tuple2<A, B>> zipWith(HigherKind<F, A> fa, Function<A, B> f) {
+    return map(fa, a -> new Tuple2<>(a, f.apply(a)));
+  }
+
+  default <B> HigherKind<F, B> as(HigherKind<F, ?> fa, Supplier<B> b) {
     return map(fa, a -> b.get());
   }
 
-//  default F<Unit> voidMe(F<A> fa) {
-  default F voidMe(F fa) {
+  default HigherKind<F, Unit> voidMe(HigherKind<F, ?> fa) {
     return as(fa, () -> Unit.instance);
   }
 
-//  default <G> Functor<F<G<?>>> compose(Functor<G<?>> fg) {
-  default <G> Functor<F> compose(Functor<G> fg) {
-//    return new Functor<F<G<?>>>() {
-    return new Functor<F>() {
+  default <G extends HigherKind> Functor<HigherKind<F, G>> compose(Functor<G> fg) {
+    return new Functor<HigherKind<F, G>>() {
+
       @Override
-//      public <A, B> F<G<B>> map(F<G<A>> fga, Function<A, B> f) {
-      public <A, B> F map(F fga, Function<A, B> f) {
-        return Functor.this.map(fga, ga -> fg.map(((G)ga), f));
+      public <A, B> HigherKind<HigherKind<F, G>, B> map(HigherKind<HigherKind<F, G>, A> fg_a,
+                                                        Function<A, B> f) {
+        HigherKind<F, HigherKind<G, A>> f_ga = (HigherKind<F, HigherKind<G, A>>) fg_a;
+        HigherKind<F, HigherKind<G, B>> mapResult_f_gb = cmap(f_ga, f);
+        Object mapResult_o = (Object) mapResult_f_gb;
+        HigherKind<HigherKind<F, G>, B> mapResult_fg_b = (HigherKind<HigherKind<F, G>, B>)
+            mapResult_o;
+        return mapResult_fg_b;
+      }
+
+      public <A, B> HigherKind<F, HigherKind<G, B>> cmap(HigherKind<F, HigherKind<G, A>> fga,
+                                                         Function<A, B> f) {
+        return Functor.this.map(fga, ga -> fg.map(((G) ga), f));
       }
     };
   }
