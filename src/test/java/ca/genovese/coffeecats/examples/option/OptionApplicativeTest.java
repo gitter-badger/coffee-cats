@@ -1,6 +1,7 @@
 package ca.genovese.coffeecats.examples.option;
 
 import ca.genovese.coffeecats.structures.Applicative;
+import ca.genovese.coffeecats.structures.Functor;
 import ca.genovese.coffeecats.types.Option;
 import org.junit.Test;
 
@@ -10,6 +11,7 @@ import static org.junit.Assert.assertEquals;
 
 public class OptionApplicativeTest extends OptionFunctorTest {
   private Applicative<Option> optionApplicative = new OptionApplicative();
+  private Functor<Option> optionFunctor = optionApplicative;
 
   public OptionApplicativeTest() {
     optionApplicative = new OptionApplicative();

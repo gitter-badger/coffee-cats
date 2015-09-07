@@ -1,29 +1,31 @@
-package ca.genovese.coffeecats.examples.option;
+package ca.genovese.coffeecats.examples.list;
 
+import ca.genovese.coffeecats.examples.list.ListFunctor;
 import ca.genovese.coffeecats.structures.Functor;
 import ca.genovese.coffeecats.structures.FunctorLaws;
-import ca.genovese.coffeecats.types.Option;
+import ca.genovese.coffeecats.types.List;
 import ca.genovese.coffeecats.util.Kind;
 
 import java.security.SecureRandom;
 import java.util.Random;
 import java.util.function.Function;
 
-public class OptionFunctorTest extends FunctorLaws<Integer, Double, String, Option> {
+public class ListFunctorTest extends FunctorLaws<Integer, Double, String, List> {
   Random rnd = new SecureRandom();
 
   @Override
-  protected Functor<Option> getFunctor() {
-    return new OptionFunctor();
+  protected Functor<List> getFunctor() {
+    return new ListFunctor();
   }
 
   @Override
-  protected Kind<Option, Integer> getRandomF() {
-    if(rnd.nextBoolean()) {
-      return new Option.None<>();
-    } else {
-      return new Option.Some<>(rnd.nextInt());
+  protected Kind<List, Integer> getRandomF() {
+    int count = rnd.nextInt(5000);
+    List<Integer> list = new List.Nil<>();
+    for(int i = 0; i < count; i++) {
+      list = new List.Cons<>(rnd.nextInt(), list);
     }
+    return list;
   }
 
   @Override
@@ -33,6 +35,7 @@ public class OptionFunctorTest extends FunctorLaws<Integer, Double, String, Opti
     } else {
       double v = rnd.nextDouble();
       return i -> i * v;
+
     }
   }
 
@@ -44,5 +47,4 @@ public class OptionFunctorTest extends FunctorLaws<Integer, Double, String, Opti
       return d -> d.toString().concat(d.toString());
     }
   }
-
 }
