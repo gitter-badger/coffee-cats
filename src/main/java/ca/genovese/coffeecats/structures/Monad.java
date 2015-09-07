@@ -1,6 +1,7 @@
 package ca.genovese.coffeecats.structures;
 
 import ca.genovese.coffeecats.util.Kind;
+
 import java.util.function.Function;
 
 public interface Monad<F extends Kind> extends Applicative<F>, FlatMap<F> {

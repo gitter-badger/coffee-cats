@@ -4,15 +4,14 @@ import ca.genovese.coffeecats.structures.composits.CompositeFunctor;
 import ca.genovese.coffeecats.util.Kind;
 import ca.genovese.coffeecats.util.Unit;
 import ca.genovese.coffeecats.util.types.tuple.Tuple2;
+
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
  * Functor.
- *
+ * <p/>
  * The name is short for "covariant functor".
- *
- * Must obey the laws defined in [[laws.FunctorLaws]].
  */
 public interface Functor<F extends Kind> {
 

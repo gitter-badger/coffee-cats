@@ -2,6 +2,7 @@ package ca.genovese.coffeecats.structures.composits;
 
 import ca.genovese.coffeecats.structures.Functor;
 import ca.genovese.coffeecats.util.Kind;
+
 import java.util.function.Function;
 
 public class CompositeFunctor<F extends Kind, G extends Kind> implements Functor<Kind<F, G>> {
@@ -18,8 +19,7 @@ public class CompositeFunctor<F extends Kind, G extends Kind> implements Functor
     Kind<F, Kind<G, A>> f_ga = (Kind<F, Kind<G, A>>) fg_a;
     Kind<F, Kind<G, B>> mapResult_f_gb = cmap(f_ga, f);
     Object mapResult_o = mapResult_f_gb;
-    Kind<Kind<F, G>, B> mapResult_fg_b = (Kind<Kind<F, G>, B>)
-        mapResult_o;
+    Kind<Kind<F, G>, B> mapResult_fg_b = (Kind<Kind<F, G>, B>) mapResult_o;
     return mapResult_fg_b;
   }
 

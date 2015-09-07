@@ -6,10 +6,8 @@ public interface Function2<A, B, R> {
   /**
    * Applies this function to the given argument.
    *
-   * @param a
-   *     the first function argument
-   * @param b
-   *     the second function argument
+   * @param a the first function argument
+   * @param b the second function argument
    * @return the function result
    */
   R apply(A a, B b);

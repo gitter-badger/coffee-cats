@@ -1,11 +1,10 @@
 package ca.genovese.coffeecats.structures.composits;
 
 import ca.genovese.coffeecats.structures.Applicative;
-import ca.genovese.coffeecats.structures.Apply;
 import ca.genovese.coffeecats.util.Kind;
-import java.util.function.Function;
 
-public class CompositeApplicative<F extends Kind, G extends Kind> extends CompositeApply<F,G> implements Applicative<Kind<F, G>> {
+public class CompositeApplicative<F extends Kind, G extends Kind> extends CompositeApply<F, G>
+    implements Applicative<Kind<F, G>> {
   private final Applicative<G> fg;
   private final Applicative<F> ff;
 

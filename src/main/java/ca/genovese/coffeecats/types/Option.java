@@ -28,8 +28,8 @@ public interface Option<T> extends Kind<Option, T> {
 
     @Override
     public boolean equals(Object o) {
-      if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
+      if (this == o) { return true; }
+      if (o == null || getClass() != o.getClass()) { return false; }
       return true;
     }
 
@@ -59,8 +59,8 @@ public interface Option<T> extends Kind<Option, T> {
 
     @Override
     public boolean equals(Object o) {
-      if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
+      if (this == o) { return true; }
+      if (o == null || getClass() != o.getClass()) { return false; }
 
       OptionSome<?> that = (OptionSome<?>) o;
 

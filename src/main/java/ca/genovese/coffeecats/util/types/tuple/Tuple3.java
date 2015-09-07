@@ -13,13 +13,13 @@ public class Tuple3<A, B, C> {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) { return true; }
+    if (o == null || getClass() != o.getClass()) { return false; }
 
     Tuple3<?, ?, ?> tuple3 = (Tuple3<?, ?, ?>) o;
 
-    if (a != null ? !a.equals(tuple3.a) : tuple3.a != null) return false;
-    if (b != null ? !b.equals(tuple3.b) : tuple3.b != null) return false;
+    if (a != null ? !a.equals(tuple3.a) : tuple3.a != null) { return false; }
+    if (b != null ? !b.equals(tuple3.b) : tuple3.b != null) { return false; }
     return !(c != null ? !c.equals(tuple3.c) : tuple3.c != null);
 
   }

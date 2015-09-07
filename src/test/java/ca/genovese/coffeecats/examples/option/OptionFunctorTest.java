@@ -1,14 +1,15 @@
 package ca.genovese.coffeecats.examples.option;
 
-import static org.junit.Assert.assertEquals;
-
-import ca.genovese.coffeecats.types.List;
 import ca.genovese.coffeecats.examples.list.ListFunctor;
 import ca.genovese.coffeecats.structures.Functor;
-import ca.genovese.coffeecats.util.Kind;
+import ca.genovese.coffeecats.types.List;
 import ca.genovese.coffeecats.types.Option;
-import java.util.function.Function;
+import ca.genovese.coffeecats.util.Kind;
 import org.junit.Test;
+
+import java.util.function.Function;
+
+import static org.junit.Assert.assertEquals;
 
 public class OptionFunctorTest {
   Functor<Option> optionFunctor;
@@ -32,28 +33,20 @@ public class OptionFunctorTest {
   @Test
   public void testLift() {
     Option<Integer> i = Option.create(1);
-    Function<Kind<Option, Integer>, Kind<Option, String>> f =
-        optionFunctor.lift(a -> a.toString());
+    Function<Kind<Option, Integer>, Kind<Option, String>> f = optionFunctor.lift(a -> a.toString());
 
     assertEquals(f.apply(i).getRealType(), Option.create("1"));
   }
 
   @Test
   public void testCompose() {
-    Kind<Kind<List, Option>, Integer> l =
-        (Kind<Kind<List, Option>, Integer>) (Object) List.create(
-            Option.create(1),
-            Option.create(null),
-            Option.create(3));
-
-    List<Option<Integer>> l2 = List.create(
-        Option.create(2),
+    Kind<Kind<List, Option>, Integer> l = (Kind<Kind<List, Option>, Integer>) (Object) List.create(Option.create(1),
         Option.create(null),
-        Option.create(4));
+        Option.create(3));
 
-    Kind<Kind<List, Option>, Integer> map = new ListFunctor()
-        .compose(optionFunctor)
-        .map(l, a -> a + 1);
+    List<Option<Integer>> l2 = List.create(Option.create(2), Option.create(null), Option.create(4));
+
+    Kind<Kind<List, Option>, Integer> map = new ListFunctor().compose(optionFunctor).map(l, a -> a + 1);
 
     assertEquals(l2, map);
   }

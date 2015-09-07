@@ -1,11 +1,12 @@
 package ca.genovese.coffeecats.examples.option;
 
-import static org.junit.Assert.assertEquals;
-
 import ca.genovese.coffeecats.structures.Applicative;
 import ca.genovese.coffeecats.types.Option;
-import java.util.function.Function;
 import org.junit.Test;
+
+import java.util.function.Function;
+
+import static org.junit.Assert.assertEquals;
 
 public class OptionApplicativeTest extends OptionFunctorTest {
   private Applicative<Option> optionApplicative = new OptionApplicative();
@@ -31,10 +32,8 @@ public class OptionApplicativeTest extends OptionFunctorTest {
   public void testApplicativeHomomorphismLawSome() {
     Integer i = 1;
     Function<Integer, String> f = a -> a.toString();
-    assertEquals(
-        optionApplicative.apply(optionApplicative.pure(i), optionApplicative.pure(f)),
-        optionApplicative.pure(f.apply(i))
-    );
+    assertEquals(optionApplicative.apply(optionApplicative.pure(i), optionApplicative.pure(f)),
+        optionApplicative.pure(f.apply(i)));
   }
 
   @Test
@@ -42,10 +41,8 @@ public class OptionApplicativeTest extends OptionFunctorTest {
     Integer i = 1;
     Option<Function<Integer, String>> ff = Option.create(a -> a.toString());
 
-    assertEquals(
-        optionApplicative.apply(optionApplicative.pure(i), ff),
-        optionApplicative.apply(ff, optionApplicative.pure(f -> f.apply(i)))
-    );
+    assertEquals(optionApplicative.apply(optionApplicative.pure(i), ff),
+        optionApplicative.apply(ff, optionApplicative.pure(f -> f.apply(i))));
   }
 
   @Test
@@ -53,9 +50,7 @@ public class OptionApplicativeTest extends OptionFunctorTest {
     Integer i = 1;
     Function<Integer, String> f = a -> a.toString();
 
-    assertEquals(
-        optionApplicative.map(optionApplicative.pure(i), f),
-        optionApplicative.apply(optionApplicative.pure(i), optionApplicative.pure(f))
-    );
+    assertEquals(optionApplicative.map(optionApplicative.pure(i), f),
+        optionApplicative.apply(optionApplicative.pure(i), optionApplicative.pure(f)));
   }
 }

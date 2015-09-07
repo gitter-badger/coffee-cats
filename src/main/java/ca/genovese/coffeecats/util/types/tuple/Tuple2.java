@@ -11,12 +11,12 @@ public class Tuple2<A, B> {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) { return true; }
+    if (o == null || getClass() != o.getClass()) { return false; }
 
     Tuple2<?, ?> tuple2 = (Tuple2<?, ?>) o;
 
-    if (a != null ? !a.equals(tuple2.a) : tuple2.a != null) return false;
+    if (a != null ? !a.equals(tuple2.a) : tuple2.a != null) { return false; }
     return !(b != null ? !b.equals(tuple2.b) : tuple2.b != null);
 
   }

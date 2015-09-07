@@ -1,6 +1,7 @@
 package ca.genovese.coffeecats.types;
 
 import ca.genovese.coffeecats.util.Kind;
+
 import java.util.Iterator;
 
 public interface List<T> extends Kind<List, T>, Iterable<T> {
@@ -37,12 +38,12 @@ public interface List<T> extends Kind<List, T>, Iterable<T> {
 
     @Override
     public boolean equals(Object o) {
-      if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
+      if (this == o) { return true; }
+      if (o == null || getClass() != o.getClass()) { return false; }
 
       Cons<?> listItem = (Cons<?>) o;
 
-      if (head != null ? !head.equals(listItem.head) : listItem.head != null) return false;
+      if (head != null ? !head.equals(listItem.head) : listItem.head != null) { return false; }
       return !(tail != null ? !tail.equals(listItem.tail) : listItem.tail != null);
     }
 
@@ -90,8 +91,8 @@ public interface List<T> extends Kind<List, T>, Iterable<T> {
 
     @Override
     public boolean equals(Object o) {
-      if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
+      if (this == o) { return true; }
+      if (o == null || getClass() != o.getClass()) { return false; }
       return true;
     }
 
