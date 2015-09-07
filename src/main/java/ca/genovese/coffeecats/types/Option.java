@@ -5,7 +5,7 @@ import ca.genovese.coffeecats.util.Kind;
 public interface Option<T> extends Kind<Option, T> {
   static <A> Option<A> create(A a) {
     if (a != null) {
-      return new OptionSome<>(a);
+      return new Some<>(a);
     } else {
       return new None<>();
     }
@@ -40,10 +40,10 @@ public interface Option<T> extends Kind<Option, T> {
 
   }
 
-  class OptionSome<T> implements Option<T> {
+  class Some<T> implements Option<T> {
     private final T t;
 
-    public OptionSome(T t) {
+    public Some(T t) {
       this.t = t;
     }
 
@@ -62,7 +62,7 @@ public interface Option<T> extends Kind<Option, T> {
       if (this == o) { return true; }
       if (o == null || getClass() != o.getClass()) { return false; }
 
-      OptionSome<?> that = (OptionSome<?>) o;
+      Some<?> that = (Some<?>) o;
 
       return !(t != null ? !t.equals(that.t) : that.t != null);
     }

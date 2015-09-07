@@ -12,7 +12,7 @@ public class OptionFunctor implements Functor<Option> {
     if (fa instanceof Option.None) {
       return new Option.None<>();
     } else {
-      return new Option.OptionSome<>(f.apply((A) fa.getRealType().get()));
+      return new Option.Some<>(f.apply((A) fa.getRealType().get()));
     }
   }
 }
