@@ -55,28 +55,41 @@ public interface List<T> extends Kind<List, T>, Iterable<T> {
     }
 
     @Override
+    public String toString() {
+      List<A> t = this;
+      StringBuilder sb = new StringBuilder("List {");
+      for (A a : this) {
+        sb.append(a.toString()).append(",");
+      }
+      sb.append("}");
+
+      return sb.toString();
+    }
+
+    @Override
     public Iterator<A> iterator() {
       return new ListIterator<>(this);
     }
 
-    private static class ListIterator<T> implements Iterator<T> {
-      private List<T> list;
+  }
 
-      public ListIterator(List<T> list) {
-        this.list = list;
-      }
+  final class ListIterator<T> implements Iterator<T> {
+    private List<T> list;
 
-      @Override
-      public boolean hasNext() {
-        return !(list instanceof Nil);
-      }
+    public ListIterator(List<T> list) {
+      this.list = list;
+    }
 
-      @Override
-      public T next() {
-        T head = list.getHead();
-        list = list.getTail();
-        return head;
-      }
+    @Override
+    public boolean hasNext() {
+      return !(list instanceof Nil);
+    }
+
+    @Override
+    public T next() {
+      T head = list.getHead();
+      list = list.getTail();
+      return head;
     }
   }
 
