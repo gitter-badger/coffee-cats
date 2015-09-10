@@ -20,7 +20,8 @@ public interface ApplyLaws<A, B, C, F extends Kind> extends FunctorLaws<A, B, C,
 
   abstract Kind<F, Function<B, C>> getRandomFBC();
 
-  @Test
+  void testApplyComposition();
+
   default void applyComposition() {
     for (int i = 0; i < getExecutionCount(); i++) {
       Kind<F, A> fa = getRandomF();

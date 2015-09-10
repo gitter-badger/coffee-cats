@@ -4,6 +4,7 @@ import ca.genovese.coffeecats.structures.Apply;
 import ca.genovese.coffeecats.structures.ApplyLaws;
 import ca.genovese.coffeecats.types.Option;
 import ca.genovese.coffeecats.util.Kind;
+import org.junit.Test;
 
 import java.util.function.Function;
 
@@ -15,11 +16,35 @@ public class OptionApplyTest extends OptionFunctorTest implements ApplyLaws<Inte
 
   @Override
   public Kind<Option, Function<Integer, Double>> getRandomFAB() {
-    return null;
+    if (rnd.nextBoolean()) {
+      return new Option.None<>();
+    } else {
+      if (rnd.nextBoolean()) {
+        return new Option.Some<>(i -> i.doubleValue());
+      } else {
+        double v = rnd.nextDouble();
+        return new Option.Some<>(i -> i * v);
+      }
+    }
+
   }
 
   @Override
   public Kind<Option, Function<Double, String>> getRandomFBC() {
-    return null;
+    if (rnd.nextBoolean()) {
+      return new Option.None<>();
+    } else {
+      if (rnd.nextBoolean()) {
+        return new Option.Some<>(d -> d.toString());
+      } else {
+        return new Option.Some<>(d -> d.toString().concat(d.toString()));
+      }
+    }
+  }
+
+  @Override
+  @Test
+  public void testApplyComposition() {
+    applyComposition();
   }
 }

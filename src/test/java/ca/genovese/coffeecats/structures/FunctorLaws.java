@@ -21,10 +21,11 @@ public interface FunctorLaws<A, B, C, F extends Kind> {
 
   Function<B, C> getRandomBC();
 
+
+  void testCovariantIdentity();
   /**
    * applying the identity function via map should result in the original F&lt;A&gt;
    */
-  @Test
   default void covariantIdentity() {
     for (int i = 0; i < getExecutionCount(); i++) {
       Kind<F, A> fa = getRandomF();
@@ -34,7 +35,8 @@ public interface FunctorLaws<A, B, C, F extends Kind> {
     }
   }
 
-  @Test
+  void testCovariantComposition();
+
   default void covariantComposition() {
     for (int i = 0; i < getExecutionCount(); i++) {
       Kind<F, A> fa = getRandomF();

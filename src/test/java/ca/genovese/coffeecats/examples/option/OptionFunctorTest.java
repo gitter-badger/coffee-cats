@@ -4,6 +4,7 @@ import ca.genovese.coffeecats.structures.Functor;
 import ca.genovese.coffeecats.structures.FunctorLaws;
 import ca.genovese.coffeecats.types.Option;
 import ca.genovese.coffeecats.util.Kind;
+import org.junit.Test;
 
 import java.security.SecureRandom;
 import java.util.Random;
@@ -43,6 +44,18 @@ public class OptionFunctorTest implements FunctorLaws<Integer, Double, String, O
     } else {
       return d -> d.toString().concat(d.toString());
     }
+  }
+
+  @Override
+  @Test
+  public void testCovariantIdentity() {
+    covariantIdentity();
+  }
+
+  @Override
+  @Test
+  public void testCovariantComposition() {
+    covariantComposition();
   }
 
 }
