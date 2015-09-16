@@ -59,7 +59,7 @@ public abstract class Lazy<A> {
    * This instance will be call-by-need (`body` will not be evaluated
    * until needed).
    */
-  public static <A> Lazy<A> ByNeed(Supplier<A> a) {
+  public static <A> Lazy<A> byNeed(Supplier<A> a) {
     return new ByNeed<>(a);
   }
 
