@@ -7,7 +7,22 @@ import ca.genovese.coffeecats.util.types.function.Function3;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+/**
+ * Applicative functor.
+ *
+ * Allows application of a function in an Applicative context to a value in an Applicative context
+ *
+ * See: [[https://www.cs.ox.ac.uk/jeremy.gibbons/publications/iterator.pdf The Essence of the Iterator Pattern]]
+ * Also: [[http://staff.city.ac.uk/~ross/papers/Applicative.pdf Applicative programming with effects]]
+ *
+ * Must obey the laws defined in [[laws.ApplicativeLaws]].
+ */
 public interface Applicative<F extends Kind> extends Apply<F> {
+  /**
+   * `pure` lifts any value into the Applicative Functor
+   *
+   * Applicative[Option].pure(10) = Some(10)
+   */
   <A> Kind<F, A> pure(A a);
 
   @Override
@@ -23,8 +38,22 @@ public interface Applicative<F extends Kind> extends Apply<F> {
     return apply(fa, map2(fb, fc, (b, c) -> a -> f.apply(a, b, c)));
   }
 
-
+  /**
+   * Two sequentially dependent Applicatives can be composed.
+   *
+   * The composition of Applicatives `F` and `G`, `F[G[x]]`, is also an Applicative
+   *
+   * Applicative[Option].compose[List].pure(10) = Some(List(10))
+   */
   default <G extends Kind<G, ?>> Applicative<Kind<F, G>> compose(Applicative<G> g) {
     return new CompositeApplicative<>(this, g);
+  }
+
+  default <A, G extends Kind, B> Kind<Kind<F, G>, B> traverse(Kind<G, A> value, Function<A, Kind<F, B>> f, Traverse<G> g) {
+    return g.traverse(value, f, this);
+  }
+
+  default <A, G extends Kind> Kind<Kind<F, G>, A> sequence(Kind<G, Kind<F, A>> as, Traverse<G> g) {
+    return traverse(as, Function.identity(), g);
   }
 }
