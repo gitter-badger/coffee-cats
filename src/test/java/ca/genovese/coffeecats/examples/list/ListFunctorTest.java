@@ -19,7 +19,7 @@ public class ListFunctorTest implements FunctorLaws<Integer, Double, String, Lis
   }
 
   @Override
-  public Kind<List, Integer> getRandomF() {
+  public Kind<List, Integer> getRandomFA() {
     int count = rnd.nextInt(10);
     List<Integer> list = new List.Nil<>();
     for (int i = 0; i < count; i++) {

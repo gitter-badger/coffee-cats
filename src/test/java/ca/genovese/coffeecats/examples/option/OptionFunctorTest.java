@@ -19,7 +19,7 @@ public class OptionFunctorTest implements FunctorLaws<Integer, Double, String, O
   }
 
   @Override
-  public Kind<Option, Integer> getRandomF() {
+  public Kind<Option, Integer> getRandomFA() {
     if (rnd.nextBoolean()) {
       return new Option.None<>();
     } else {

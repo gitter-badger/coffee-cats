@@ -22,7 +22,7 @@ public class ListOfOptionFunctorTest implements FunctorLaws<Integer, Double, Str
   }
 
   @Override
-  public  Kind<Kind<List, Option>, Integer> getRandomF() {
+  public  Kind<Kind<List, Option>, Integer> getRandomFA() {
     int count = rnd.nextInt(5000);
     List<Option<Integer>> list = new List.Nil<>();
     for (int i = 0; i < count; i++) {

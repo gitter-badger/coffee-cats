@@ -1,7 +1,6 @@
 package ca.genovese.coffeecats.structures;
 
 import ca.genovese.coffeecats.util.Kind;
-import org.junit.Test;
 
 import java.util.function.Function;
 
@@ -24,7 +23,7 @@ public interface ApplyLaws<A, B, C, F extends Kind> extends FunctorLaws<A, B, C,
 
   default void applyComposition() {
     for (int i = 0; i < getExecutionCount(); i++) {
-      Kind<F, A> fa = getRandomF();
+      Kind<F, A> fa = getRandomFA();
       Kind<F, Function<A, B>> fab = getRandomFAB();
       Kind<F, Function<B, C>> fbc = getRandomFBC();
       assertEquals("applying over 2 functions should produce the same value as applying their composition",

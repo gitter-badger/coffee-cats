@@ -1,7 +1,6 @@
 package ca.genovese.coffeecats.structures;
 
 import ca.genovese.coffeecats.util.Kind;
-import org.junit.Test;
 
 import java.util.function.Function;
 
@@ -15,7 +14,7 @@ public interface FunctorLaws<A, B, C, F extends Kind> {
 
   Functor<F> getFunctor();
 
-  Kind<F, A> getRandomF();
+  Kind<F, A> getRandomFA();
 
   Function<A, B> getRandomAB();
 
@@ -28,7 +27,7 @@ public interface FunctorLaws<A, B, C, F extends Kind> {
    */
   default void covariantIdentity() {
     for (int i = 0; i < getExecutionCount(); i++) {
-      Kind<F, A> fa = getRandomF();
+      Kind<F, A> fa = getRandomFA();
       assertEquals("applying the identity function via map should result in the original value",
           fa,
           getFunctor().map(fa, Function.identity()));
@@ -39,7 +38,7 @@ public interface FunctorLaws<A, B, C, F extends Kind> {
 
   default void covariantComposition() {
     for (int i = 0; i < getExecutionCount(); i++) {
-      Kind<F, A> fa = getRandomF();
+      Kind<F, A> fa = getRandomFA();
       Function<A, B> f = getRandomAB();
       Function<B, C> g = getRandomBC();
       assertEquals("mapping over 2 functions should produce the same value as mapping over their composition",
