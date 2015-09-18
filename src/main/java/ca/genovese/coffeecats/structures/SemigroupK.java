@@ -20,7 +20,7 @@ import ca.genovese.coffeecats.util.Kind;
  *    The combination operation just depends on the structure of F,
  *    but not the structure of A.
  */
-public interface SemiGroupK<F extends Kind> {
+public interface SemigroupK<F extends Kind> {
   /**
    * Combine two F[A] values.
    */
@@ -29,7 +29,7 @@ public interface SemiGroupK<F extends Kind> {
   /**
    * Given a type A, create a concrete Semigroup[F[A]].
    */
-  default <A> SemiGroup<Kind<F, A>> algebra() {
-    return (x, y) -> SemiGroupK.this.combine(x, y);
+  default <A> Semigroup<Kind<F, A>> algebra() {
+    return (x, y) -> SemigroupK.this.combine(x, y);
   }
 }

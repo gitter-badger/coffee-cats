@@ -5,7 +5,7 @@ import ca.genovese.coffeecats.types.Option;
 /**
  * A semigroup is any set `A` with an associative operation (`combine`).
  */
-public interface SemiGroup<A> {
+public interface Semigroup<A> {
   /**
    * Associative operation taking which combines two values.
    */

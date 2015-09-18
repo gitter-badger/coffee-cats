@@ -1,6 +1,6 @@
 package ca.genovese.coffeecats.structures;
 
-public interface Monoid<A> extends SemiGroup<A>{
+public interface Monoid<A> extends Semigroup<A> {
   /**
    * Return the identity element for this monoid.
    */
