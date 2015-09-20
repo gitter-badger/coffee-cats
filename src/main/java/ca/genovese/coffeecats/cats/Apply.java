@@ -38,11 +38,11 @@ public interface Apply<F> extends Functor<F> {
     return fa -> apply(fa, f);
   }
 
-  default <G<G, ?>> Apply<Kind<F, G>> compose(Apply<G> g) {
+  default <G> Apply<Kind<F, G>> compose(Apply<G> g) {
     return new CompositeApply<>(this, g);
   }
 
-  public class CompositeApply<F, G> extends CompositeFunctor<F, G>
+  class CompositeApply<F, G> extends CompositeFunctor<F, G>
       implements Apply<Kind<F, G>> {
     private final Apply<G> fg;
     private final Apply<F> ff;
@@ -55,8 +55,7 @@ public interface Apply<F> extends Functor<F> {
 
     @Override
     public <A, B> Kind<Kind<F, G>, B> apply(Kind<Kind<F, G>, A> fg_a, Kind<Kind<F, G>, Function<A, B>> fg_ab) {
-      return (Kind<Kind<F, G>, B>)
-          ff.<Kind<G, A>, Kind<G, B>>apply((Kind<F, Kind<G, A>>) fg_a,
+      return (Kind<Kind<F, G>, B>) ff.<Kind<G, A>, Kind<G, B>>apply((Kind<F, Kind<G, A>>) fg_a,
           ff.map((Kind<F, Kind<G, Function<A, B>>>) (Object) fg_ab, gab -> ga -> fg.apply(ga, gab)));
     }
   }

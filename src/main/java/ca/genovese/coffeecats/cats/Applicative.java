@@ -44,7 +44,7 @@ public interface Applicative<F> extends Apply<F> {
    * <p/>
    * Applicative[Option].compose[List].pure(10) = Some(List(10))
    */
-  default <G<G, ?>> Applicative<Kind<F, G>> compose(Applicative<G> g) {
+  default <G> Applicative<Kind<F, G>> compose(Applicative<G> g) {
     return new CompositeApplicative<>(this, g);
   }
 
@@ -58,8 +58,7 @@ public interface Applicative<F> extends Apply<F> {
     return traverse(as, Function.identity(), g);
   }
 
-  class CompositeApplicative<F, G> extends CompositeApply<F, G>
-      implements Applicative<Kind<F, G>> {
+  class CompositeApplicative<F, G> extends CompositeApply<F, G> implements Applicative<Kind<F, G>> {
     private final Applicative<G> fg;
     private final Applicative<F> ff;
 
