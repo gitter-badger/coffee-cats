@@ -4,9 +4,9 @@ import ca.genovese.coffeecats.util.Kind;
 
 import java.util.Iterator;
 
-public interface List<T> extends Kind<List, T>, Iterable<T> {
-  static <A> List<A> create(A... as) {
-    List list = new Nil<>();
+public interface FunctionalList<T> extends Kind<FunctionalList, T>, Iterable<T> {
+  static <A> FunctionalList<A> create(A... as) {
+    FunctionalList list = new Nil<>();
 
     for (int i = as.length - 1; i >= 0; i--) {
       list = new Cons<>(as[i], list);
@@ -17,13 +17,13 @@ public interface List<T> extends Kind<List, T>, Iterable<T> {
 
   T getHead();
 
-  List<T> getTail();
+  FunctionalList<T> getTail();
 
-  class Cons<A> implements List<A> {
+  class Cons<A> implements FunctionalList<A> {
     private final A head;
-    private final List<A> tail;
+    private final FunctionalList<A> tail;
 
-    public Cons(A head, List<A> tail) {
+    public Cons(A head, FunctionalList<A> tail) {
       this.head = head;
       this.tail = tail;
     }
@@ -32,7 +32,7 @@ public interface List<T> extends Kind<List, T>, Iterable<T> {
       return head;
     }
 
-    public List<A> getTail() {
+    public FunctionalList<A> getTail() {
       return tail;
     }
 
@@ -56,7 +56,7 @@ public interface List<T> extends Kind<List, T>, Iterable<T> {
 
     @Override
     public String toString() {
-      List<A> t = this;
+      FunctionalList<A> t = this;
       StringBuilder sb = new StringBuilder("List {");
       for (A a : this) {
         sb.append(a.toString()).append(",");
@@ -74,9 +74,9 @@ public interface List<T> extends Kind<List, T>, Iterable<T> {
   }
 
   final class ListIterator<T> implements Iterator<T> {
-    private List<T> list;
+    private FunctionalList<T> list;
 
-    public ListIterator(List<T> list) {
+    public ListIterator(FunctionalList<T> list) {
       this.list = list;
     }
 
@@ -93,12 +93,12 @@ public interface List<T> extends Kind<List, T>, Iterable<T> {
     }
   }
 
-  final class Nil<A> implements List<A> {
+  final class Nil<A> implements FunctionalList<A> {
     public A getHead() {
       throw new IllegalStateException("Head on an empty list");
     }
 
-    public List<A> getTail() {
+    public FunctionalList<A> getTail() {
       throw new IllegalStateException("Tail on an empty list");
     }
 

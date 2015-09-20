@@ -1,8 +1,8 @@
-package ca.genovese.coffeecats.std.list;
+package ca.genovese.coffeecats.std.functionallist;
 
 import ca.genovese.coffeecats.cats.Functor;
 import ca.genovese.coffeecats.laws.FunctorLaws;
-import ca.genovese.coffeecats.types.List;
+import ca.genovese.coffeecats.types.FunctionalList;
 import ca.genovese.coffeecats.util.Kind;
 import org.junit.Test;
 
@@ -10,20 +10,20 @@ import java.security.SecureRandom;
 import java.util.Random;
 import java.util.function.Function;
 
-public class ListFunctorTest implements FunctorLaws<Integer, Double, String, List> {
+public class FunctionalListFunctorTest implements FunctorLaws<Integer, Double, String, FunctionalList> {
   Random rnd = new SecureRandom();
 
   @Override
-  public Functor<List> getFunctor() {
+  public Functor<FunctionalList> getFunctor() {
     return new ListFunctor();
   }
 
   @Override
-  public Kind<List, Integer> getRandomFA() {
+  public Kind<FunctionalList, Integer> getRandomFA() {
     int count = rnd.nextInt(10);
-    List<Integer> list = new List.Nil<>();
+    FunctionalList<Integer> list = new FunctionalList.Nil<>();
     for (int i = 0; i < count; i++) {
-      list = new List.Cons<>(rnd.nextInt(10), list);
+      list = new FunctionalList.Cons<>(rnd.nextInt(10), list);
     }
     return list;
   }
