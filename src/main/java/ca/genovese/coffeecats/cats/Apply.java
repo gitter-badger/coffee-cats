@@ -10,7 +10,7 @@ import java.util.function.Function;
  * <p/>
  * Must obey the laws defined in [[laws.ApplyLaws]].
  */
-public interface Apply<F extends Kind> extends Functor<F> {
+public interface Apply<F> extends Functor<F> {
 
   /**
    * Given a value and a function in the Apply context, applies the
@@ -38,11 +38,11 @@ public interface Apply<F extends Kind> extends Functor<F> {
     return fa -> apply(fa, f);
   }
 
-  default <G extends Kind<G, ?>> Apply<Kind<F, G>> compose(Apply<G> g) {
+  default <G<G, ?>> Apply<Kind<F, G>> compose(Apply<G> g) {
     return new CompositeApply<>(this, g);
   }
 
-  public class CompositeApply<F extends Kind, G extends Kind> extends CompositeFunctor<F, G>
+  public class CompositeApply<F, G> extends CompositeFunctor<F, G>
       implements Apply<Kind<F, G>> {
     private final Apply<G> fg;
     private final Apply<F> ff;
@@ -55,10 +55,9 @@ public interface Apply<F extends Kind> extends Functor<F> {
 
     @Override
     public <A, B> Kind<Kind<F, G>, B> apply(Kind<Kind<F, G>, A> fg_a, Kind<Kind<F, G>, Function<A, B>> fg_ab) {
-      Kind<F, Kind<G, A>> f_ga = (Kind<F, Kind<G, A>>) fg_a;
-      Kind<F, Kind<G, Function<A, B>>> f_gab = (Kind<F, Kind<G, Function<A, B>>>) (Object) fg_ab;
-      Kind<F, Kind<G, B>> b = ff.apply(f_ga, ff.map(f_gab, gab -> ga -> fg.apply(ga, gab)));
-      return (Kind<Kind<F, G>, B>) (Object) b;
+      return (Kind<Kind<F, G>, B>)
+          ff.<Kind<G, A>, Kind<G, B>>apply((Kind<F, Kind<G, A>>) fg_a,
+          ff.map((Kind<F, Kind<G, Function<A, B>>>) (Object) fg_ab, gab -> ga -> fg.apply(ga, gab)));
     }
   }
 

@@ -12,7 +12,7 @@ import java.util.function.Supplier;
  * <p/>
  * The name is short for "covariant functor".
  */
-public interface Functor<F extends Kind> {
+public interface Functor<F> {
 
   <A, B> Kind<F, B> map(Kind<F, A> fa, Function<A, B> f);
 
@@ -50,11 +50,11 @@ public interface Functor<F extends Kind> {
    * Functor on G[F[_]], with a map method which uses an A => B to
    * map a G[F[A]] to a G[F[B]].
    */
-  default <G extends Kind> Functor<Kind<F, G>> compose(Functor<G> fg) {
+  default <G> Functor<Kind<F, G>> compose(Functor<G> fg) {
     return new CompositeFunctor<>(this, fg);
   }
 
-  class CompositeFunctor<F extends Kind, G extends Kind> implements Functor<Kind<F, G>> {
+  class CompositeFunctor<F, G> implements Functor<Kind<F, G>> {
     private final Functor<G> fg;
     private final Functor<F> ff;
 
@@ -65,17 +65,8 @@ public interface Functor<F extends Kind> {
 
     @Override
     public <A, B> Kind<Kind<F, G>, B> map(Kind<Kind<F, G>, A> fg_a, Function<A, B> f) {
-      Kind<F, Kind<G, A>> f_ga = (Kind<F, Kind<G, A>>) fg_a;
-      Kind<F, Kind<G, B>> mapResult_f_gb = cmap(f_ga, f);
-      Object mapResult_o = mapResult_f_gb;
-      Kind<Kind<F, G>, B> mapResult_fg_b = (Kind<Kind<F, G>, B>) mapResult_o;
-      return mapResult_fg_b;
-    }
-
-    public <A, B> Kind<F, Kind<G, B>> cmap(Kind<F, Kind<G, A>> fga, Function<A, B> f) {
-      return ff.map(fga, ga -> fg.map(((G) ga), f));
+      return (Kind<Kind<F, G>, B>) ff.map((Kind<F, Kind<G, A>>) fg_a, ga -> fg.map(((Kind<G, A>) ga), f));
     }
   }
-
 }
 

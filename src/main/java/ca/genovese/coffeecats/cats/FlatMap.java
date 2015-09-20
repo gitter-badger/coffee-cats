@@ -7,7 +7,7 @@ import ca.genovese.coffeecats.util.types.tuple.Tuple2;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public interface FlatMap<F extends Kind> extends Apply<F> {
+public interface FlatMap<F> extends Apply<F> {
   <A, B> Kind<F, B> flatMap(Kind<F, A> fa, Function<A, Kind<F, B>> f);
 
   /**

@@ -16,7 +16,7 @@ import java.util.function.Function;
  * <p/>
  * Must obey the laws defined in [[laws.ApplicativeLaws]].
  */
-public interface Applicative<F extends Kind> extends Apply<F> {
+public interface Applicative<F> extends Apply<F> {
   /**
    * `pure` lifts any value into the Applicative Functor
    * <p/>
@@ -44,21 +44,21 @@ public interface Applicative<F extends Kind> extends Apply<F> {
    * <p/>
    * Applicative[Option].compose[List].pure(10) = Some(List(10))
    */
-  default <G extends Kind<G, ?>> Applicative<Kind<F, G>> compose(Applicative<G> g) {
+  default <G<G, ?>> Applicative<Kind<F, G>> compose(Applicative<G> g) {
     return new CompositeApplicative<>(this, g);
   }
 
-  default <A, G extends Kind, B> Kind<Kind<F, G>, B> traverse(Kind<G, A> value,
+  default <A, G, B> Kind<Kind<F, G>, B> traverse(Kind<G, A> value,
                                                               Function<A, Kind<F, B>> f,
                                                               Traverse<G> g) {
     return g.traverse(value, f, this);
   }
 
-  default <A, G extends Kind> Kind<Kind<F, G>, A> sequence(Kind<G, Kind<F, A>> as, Traverse<G> g) {
+  default <A, G> Kind<Kind<F, G>, A> sequence(Kind<G, Kind<F, A>> as, Traverse<G> g) {
     return traverse(as, Function.identity(), g);
   }
 
-  class CompositeApplicative<F extends Kind, G extends Kind> extends CompositeApply<F, G>
+  class CompositeApplicative<F, G> extends CompositeApply<F, G>
       implements Applicative<Kind<F, G>> {
     private final Applicative<G> fg;
     private final Applicative<F> ff;

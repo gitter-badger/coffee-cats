@@ -12,7 +12,7 @@ import java.util.function.Predicate;
  * us since it allows us to add a `filter` method to a Monad, which is
  * used when pattern matching or using guards in for comprehensions.
  */
-public interface MonadFilter<F extends Kind> extends Monad<F> {
+public interface MonadFilter<F> extends Monad<F> {
     <A> Kind<F, A> empty();
 
   default <A> Kind<F, A>filter(Kind<F, A> fa, Predicate<A> p) {

@@ -21,7 +21,7 @@ import ca.genovese.coffeecats.util.Kind;
  *    The combination operation just depends on the structure of F,
  *    but not the structure of A.
  */
-public interface SemigroupK<F extends Kind> {
+public interface SemigroupK<F> {
   /**
    * Combine two F[A] values.
    */

@@ -13,7 +13,7 @@ import java.util.function.Function;
  *
  * Must obey the laws defined in [[laws.MonadLaws]].
  */
-public interface Monad<F extends Kind> extends Applicative<F>, FlatMap<F> {
+public interface Monad<F> extends Applicative<F>, FlatMap<F> {
   @Override
   default <A, B> Kind<F, B> map(Kind<F, A> fa, Function<A, B> f) {
     return flatMap(fa, a -> pure(f.apply(a)));

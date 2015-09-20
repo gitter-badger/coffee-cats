@@ -23,7 +23,7 @@ import ca.genovese.coffeecats.util.Kind;
  *    combination operation and empty value just depend on the
  *    structure of F, but not on the structure of A.
  */
-public interface MonoidK <F extends Kind> extends SemigroupK<F> {
+public interface MonoidK <F> extends SemigroupK<F> {
   /**
    * Given a type A, create an "empty" F[A] value.
    */

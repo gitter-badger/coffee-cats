@@ -28,7 +28,7 @@ import java.util.function.Predicate;
  * <p/>
  * See: [[https://www.cs.nott.ac.uk/~gmh/fold.pdf A tutorial on the universality and expressiveness of fold]]
  */
-public interface Foldable<F extends Kind> {
+public interface Foldable<F> {
   /**
    * Left associative fold on 'F' using the function 'f'.
    */
@@ -97,7 +97,7 @@ public interface Foldable<F extends Kind> {
    * or effect, and the specific `A` aspect of `G[A]` is not otherwise
    * needed.
    */
-  default <G extends Kind, A, B> Kind<G, Unit> traverse_(Kind<F, A> fa, Function<A, Kind<G, B>> f, Applicative<G> G) {
+  default <G, A, B> Kind<G, Unit> traverse_(Kind<F, A> fa, Function<A, Kind<G, B>> f, Applicative<G> G) {
     return foldLeft(fa, G.pure(Unit.instance), (acc, a) -> G.map2(acc, f.apply(a), (u, b) -> Unit.instance));
   }
 
@@ -115,7 +115,7 @@ public interface Foldable<F extends Kind> {
    * F.sequence_(List(Option(1), None, Option(3)))      // None
    * }}}
    */
-  default <G extends Kind, A> Kind<G, Unit> sequence_(Kind<F, Kind<G, A>> fga, Applicative<G> G) {
+  default <G, A> Kind<G, Unit> sequence_(Kind<F, Kind<G, A>> fga, Applicative<G> G) {
     return traverse_(fga, Function.identity(), G);
   }
 
@@ -133,7 +133,7 @@ public interface Foldable<F extends Kind> {
    * // List(1, 2, 3, 4, 5)
    * }}}
    */
-  default <G extends Kind, A> Kind<G, A> foldK(Kind<F, Kind<G, A>> fga, MonoidK<G> G) {
+  default <G, A> Kind<G, A> foldK(Kind<F, Kind<G, A>> fga, MonoidK<G> G) {
     Monoid<Kind<G, A>> algebra = G.algebra();
     return fold(fga, algebra);
   }
