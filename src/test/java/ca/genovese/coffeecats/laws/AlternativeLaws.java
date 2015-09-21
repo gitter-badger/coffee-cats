@@ -9,7 +9,7 @@ import java.util.function.Function;
 
 import static org.junit.Assert.assertEquals;
 
-public interface AlternativeLaws<A, B, C, F extends Kind> extends ApplicativeLaws<A, B, C, F>, MonoidKLaws<A, F> {
+public interface AlternativeLaws<A, B, C, F> extends ApplicativeLaws<A, B, C, F>, MonoidKLaws<A, F> {
 
   Alternative<F> getAlternative();
 

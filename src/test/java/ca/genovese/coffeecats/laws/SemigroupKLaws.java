@@ -5,7 +5,7 @@ import ca.genovese.coffeecats.util.Kind;
 
 import static org.junit.Assert.assertEquals;
 
-public interface SemigroupKLaws<A, F extends Kind> extends BaseLaw {
+public interface SemigroupKLaws<A, F> extends BaseLaw {
 
   SemigroupK<F> getSemigroupK();
 

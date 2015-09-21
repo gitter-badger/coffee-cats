@@ -6,7 +6,7 @@ import ca.genovese.coffeecats.util.Kind;
 
 import static org.junit.Assert.assertEquals;
 
-public interface MonoidKLaws<A, F extends Kind> extends SemigroupKLaws<A, F> {
+public interface MonoidKLaws<A, F> extends SemigroupKLaws<A, F> {
 
   MonoidK<F> getMonoidK();
 

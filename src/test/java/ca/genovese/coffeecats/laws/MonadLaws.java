@@ -1,6 +1,7 @@
 package ca.genovese.coffeecats.laws;
 
 import ca.genovese.coffeecats.cats.Applicative;
+import ca.genovese.coffeecats.cats.Apply;
 import ca.genovese.coffeecats.cats.Monad;
 import ca.genovese.coffeecats.util.Kind;
 
@@ -8,7 +9,7 @@ import java.util.function.Function;
 
 import static org.junit.Assert.assertEquals;
 
-public interface MonadLaws<A, B, C, F extends Kind> extends ApplicativeLaws<A, B, C, F> {
+public interface MonadLaws<A, B, C, F> extends ApplicativeLaws<A, B, C, F>, FlatMapLaws<A, B, C, F> {
 
   Monad<F> getMonad();
 
@@ -17,7 +18,10 @@ public interface MonadLaws<A, B, C, F extends Kind> extends ApplicativeLaws<A, B
     return getMonad();
   }
 
-  Function<A, Kind<F, B>> getRandomAFB();
+  @Override
+  default Apply<F> getApply() {
+    return getMonad();
+  }
 
   void testMonadLeftIdentity();
 

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="337.0" y="320.0">ca.genovese.coffeecats.cats.Bimonad</node>
+    <node x="354.0" y="80.0">ca.genovese.coffeecats.cats.CoflatMap</node>
+    <node x="253.0" y="160.0">ca.genovese.coffeecats.cats.FlatMap</node>
+    <node x="0.0" y="160.0">ca.genovese.coffeecats.cats.SemigroupK</node>
+    <node x="99.70098039215685" y="400.0">ca.genovese.coffeecats.cats.MonadCombine</node>
+    <node x="237.5" y="240.0">ca.genovese.coffeecats.cats.Monad</node>
+    <node x="51.20098039215685" y="320.0">ca.genovese.coffeecats.cats.Alternative</node>
+    <node x="146.0" y="475.0">ca.genovese.coffeecats.cats.Show</node>
+    <node x="365.0" y="475.0">ca.genovese.coffeecats.cats.Fold</node>
+    <node x="129.0" y="160.0">ca.genovese.coffeecats.cats.Applicative</node>
+    <node x="92.84803921568627" y="80.0">ca.genovese.coffeecats.cats.Traverse</node>
+    <node x="0.0" y="475.0">ca.genovese.coffeecats.algebra.Semigroup</node>
+    <node x="197.10294117647055" y="0.0">ca.genovese.coffeecats.cats.Functor</node>
+    <node x="356.0" y="160.0">ca.genovese.coffeecats.cats.Comonad</node>
+    <node x="471.0" y="475.0">ca.genovese.coffeecats.algebra.Eq</node>
+    <node x="258.0" y="475.0">ca.genovese.coffeecats.cats.Lazy</node>
+    <node x="10.0" y="555.0">ca.genovese.coffeecats.algebra.Monoid</node>
+    <node x="10.0" y="240.0">ca.genovese.coffeecats.cats.MonoidK</node>
+    <node x="71.09803921568627" y="0.0">ca.genovese.coffeecats.cats.Foldable</node>
+    <node x="200.20098039215685" y="80.0">ca.genovese.coffeecats.cats.Apply</node>
+    <node x="202.5" y="320.0">ca.genovese.coffeecats.cats.MonadFilter</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="ca.genovese.coffeecats.cats.MonoidK" target="ca.genovese.coffeecats.cats.SemigroupK">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="ca.genovese.coffeecats.cats.MonadCombine" target="ca.genovese.coffeecats.cats.MonadFilter">
+      <point x="33.0" y="-15.0" />
+      <point x="198.70098039215685" y="375.0" />
+      <point x="256.5" y="375.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="ca.genovese.coffeecats.cats.FlatMap" target="ca.genovese.coffeecats.cats.Apply">
+      <point x="0.0" y="-15.0" />
+      <point x="294.5" y="135.0" />
+      <point x="252.70098039215685" y="135.0" />
+      <point x="17.5" y="15.0" />
+    </edge>
+    <edge source="ca.genovese.coffeecats.cats.Alternative" target="ca.genovese.coffeecats.cats.Applicative">
+      <point x="25.5" y="-15.0" />
+      <point x="127.70098039215685" y="295.0" />
+      <point x="155.0" y="295.0" />
+      <point x="-26.0" y="15.0" />
+    </edge>
+    <edge source="ca.genovese.coffeecats.cats.Traverse" target="ca.genovese.coffeecats.cats.Functor">
+      <point x="21.75" y="-15.0" />
+      <point x="158.09803921568627" y="55.0" />
+      <point x="210.76960784313724" y="55.0" />
+      <point x="-27.333333333333332" y="15.0" />
+    </edge>
+    <edge source="ca.genovese.coffeecats.cats.CoflatMap" target="ca.genovese.coffeecats.cats.Functor">
+      <point x="0.0" y="-15.0" />
+      <point x="403.0" y="55.0" />
+      <point x="265.43627450980387" y="55.0" />
+      <point x="27.33333333333333" y="15.0" />
+    </edge>
+    <edge source="ca.genovese.coffeecats.cats.MonadCombine" target="ca.genovese.coffeecats.cats.Alternative">
+      <point x="-33.0" y="-15.0" />
+      <point x="132.70098039215685" y="375.0" />
+      <point x="102.20098039215685" y="375.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="ca.genovese.coffeecats.cats.MonadFilter" target="ca.genovese.coffeecats.cats.Monad">
+      <point x="0.0" y="-15.0" />
+      <point x="-19.0" y="15.0" />
+    </edge>
+    <edge source="ca.genovese.coffeecats.cats.Apply" target="ca.genovese.coffeecats.cats.Functor">
+      <point x="0.0" y="-15.0" />
+      <point x="235.20098039215685" y="55.0" />
+      <point x="238.10294117647055" y="55.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="ca.genovese.coffeecats.cats.Alternative" target="ca.genovese.coffeecats.cats.MonoidK">
+      <point x="-25.5" y="-15.0" />
+      <point x="76.70098039215685" y="295.0" />
+      <point x="54.5" y="295.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="ca.genovese.coffeecats.cats.Applicative" target="ca.genovese.coffeecats.cats.Apply">
+      <point x="0.0" y="-15.0" />
+      <point x="181.0" y="135.0" />
+      <point x="217.70098039215685" y="135.0" />
+      <point x="-17.5" y="15.0" />
+    </edge>
+    <edge source="ca.genovese.coffeecats.cats.Traverse" target="ca.genovese.coffeecats.cats.Foldable">
+      <point x="-21.75" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="ca.genovese.coffeecats.algebra.Monoid" target="ca.genovese.coffeecats.algebra.Semigroup">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="ca.genovese.coffeecats.cats.Bimonad" target="ca.genovese.coffeecats.cats.Monad">
+      <point x="-22.0" y="-15.0" />
+      <point x="359.0" y="295.0" />
+      <point x="294.5" y="295.0" />
+      <point x="19.0" y="15.0" />
+    </edge>
+    <edge source="ca.genovese.coffeecats.cats.Bimonad" target="ca.genovese.coffeecats.cats.Comonad">
+      <point x="22.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="ca.genovese.coffeecats.cats.Monad" target="ca.genovese.coffeecats.cats.FlatMap">
+      <point x="19.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="ca.genovese.coffeecats.cats.Monad" target="ca.genovese.coffeecats.cats.Applicative">
+      <point x="-19.0" y="-15.0" />
+      <point x="256.5" y="215.0" />
+      <point x="207.0" y="215.0" />
+      <point x="26.0" y="15.0" />
+    </edge>
+    <edge source="ca.genovese.coffeecats.cats.Comonad" target="ca.genovese.coffeecats.cats.CoflatMap">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.4809917355371901" x="260.0" y="292.5" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

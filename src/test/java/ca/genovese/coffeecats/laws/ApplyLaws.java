@@ -8,7 +8,7 @@ import java.util.function.Function;
 
 import static org.junit.Assert.assertEquals;
 
-public interface ApplyLaws<A, B, C, F extends Kind> extends FunctorLaws<A, B, C, F> {
+public interface ApplyLaws<A, B, C, F> extends FunctorLaws<A, B, C, F> {
 
   abstract Apply<F> getApply();
 

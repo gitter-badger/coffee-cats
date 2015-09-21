@@ -7,7 +7,7 @@ import java.util.function.Function;
 
 import static org.junit.Assert.assertEquals;
 
-public interface FunctorLaws<A, B, C, F extends Kind> extends BaseLaw {
+public interface FunctorLaws<A, B, C, F> extends BaseLaw {
 
   Functor<F> getFunctor();
 

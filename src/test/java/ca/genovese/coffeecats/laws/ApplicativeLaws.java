@@ -9,7 +9,7 @@ import java.util.function.Function;
 
 import static org.junit.Assert.assertEquals;
 
-public interface ApplicativeLaws<A, B, C, F extends Kind> extends ApplyLaws<A, B, C, F> {
+public interface ApplicativeLaws<A, B, C, F> extends ApplyLaws<A, B, C, F> {
 
   Applicative<F> getApplicative();
 

@@ -8,7 +8,7 @@ import java.util.function.Function;
 
 import static org.junit.Assert.assertEquals;
 
-public interface MonadCombineLaws<A, B, C, F extends Kind> extends MonadFilterLaws<A, B, C, F> {
+public interface MonadCombineLaws<A, B, C, F> extends MonadFilterLaws<A, B, C, F> {
 
   MonadCombine<F> getMonadCombine();
 
