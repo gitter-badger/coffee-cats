@@ -1,6 +1,7 @@
 package ca.genovese.coffeecats.cats;
 
 import ca.genovese.coffeecats.util.Kind;
+import ca.genovese.coffeecats.util.types.function.Function3;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -25,6 +26,7 @@ public interface Apply<F> extends Functor<F> {
     return apply(fa, apply(fb, map(ff, f -> b -> a -> f.apply(a, b))));
   }
 
+
   /**
    * Applies the pure (binary) function f to the effectful values fa and fb.
    * <p/>
@@ -32,6 +34,13 @@ public interface Apply<F> extends Functor<F> {
    */
   default <A, B, Z> Kind<F, Z> map2(Kind<F, A> fa, Kind<F, B> fb, BiFunction<A, B, Z> f) {
     return apply(fa, map(fb, b -> a -> f.apply(a, b)));
+  }
+
+  /**
+   * Applies the pure (binary) function f to the effectful values fa, fb, and fc.
+   */
+  default <A, B, C, Z> Kind<F, Z> map3(Kind<F, A> fa, Kind<F, B> fb, Kind<F, C> fc, Function3<A, B, C, Z> f) {
+    return apply(fa, map2(fb, fc, (b, c) -> a -> f.apply(a, b, c)));
   }
 
   default <A, B> Function<Kind<F, A>, Kind<F, B>> flip(Kind<F, Function<A, B>> f) {
