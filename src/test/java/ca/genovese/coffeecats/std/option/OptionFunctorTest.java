@@ -47,6 +47,38 @@ public class OptionFunctorTest implements FunctorLaws<Integer, Double, String, O
   }
 
   @Override
+  public Function<Double, Integer> getRandomBA() {
+    if (true || rnd.nextBoolean()) {
+      return d -> d.intValue();
+    } else {
+      int i = rnd.nextInt();
+      return d -> d.intValue() * i;
+    }
+  }
+
+  @Override
+  public Function<String, Double> getRandomCB() {
+    if (true || rnd.nextBoolean()) {
+      return s -> Double.parseDouble(s);
+    } else {
+      double d = rnd.nextDouble();
+      return s -> d;
+    }
+  }
+
+  @Override
+  @Test
+  public void testInvariantIdentity() {
+    invariantIdentity();
+  }
+
+  @Override
+  @Test
+  public void testInvariantComposition() {
+    invariantComposition();
+  }
+
+  @Override
   @Test
   public void testCovariantIdentity() {
     covariantIdentity();

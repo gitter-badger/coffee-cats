@@ -1,5 +1,6 @@
 package ca.genovese.coffeecats.cats;
 
+import ca.genovese.coffeecats.cats.functor.Invariant;
 import ca.genovese.coffeecats.util.Kind;
 import ca.genovese.coffeecats.util.Unit;
 import ca.genovese.coffeecats.util.types.tuple.Tuple2;
@@ -12,9 +13,13 @@ import java.util.function.Supplier;
  * <p/>
  * The name is short for "covariant functor".
  */
-public interface Functor<F> {
+public interface Functor<F> extends Invariant<F> {
 
   <A, B> Kind<F, B> map(Kind<F, A> fa, Function<A, B> f);
+
+  default <A, B> Kind<F, B> imap(Kind<F, A> fa, Function<A, B> f, Function<B, A> g) {
+    return map(fa, f);
+  }
 
   /**
    * Lift a function f to operate on Functors

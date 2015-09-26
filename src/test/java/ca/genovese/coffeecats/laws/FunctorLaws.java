@@ -1,22 +1,21 @@
 package ca.genovese.coffeecats.laws;
 
 import ca.genovese.coffeecats.cats.Functor;
+import ca.genovese.coffeecats.cats.functor.Invariant;
 import ca.genovese.coffeecats.util.Kind;
 
 import java.util.function.Function;
 
 import static org.junit.Assert.assertEquals;
 
-public interface FunctorLaws<A, B, C, F> extends BaseLaw {
+public interface FunctorLaws<A, B, C, F> extends InvariantLaws<A, B, C, F> {
 
   Functor<F> getFunctor();
 
-  Kind<F, A> getRandomFA();
-
-  Function<A, B> getRandomAB();
-
-  Function<B, C> getRandomBC();
-
+  @Override
+  default Invariant<F> getInvariant() {
+    return getFunctor();
+  }
 
   void testCovariantIdentity();
   /**
